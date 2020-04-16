@@ -1,1 +1,2 @@
 # graphslope
+# pozdro dla kumatych!

@@ -1,10 +1,9 @@
 
 create_lambda = function(sample_cov,
-                         p,
+                         low_tri_size,
                          n,
                          alpha = 0.05) {
 
-  low_tri_size = p * (p - 1) / 2
   k = 1:low_tri_size
 
   two_largest_prod = prod( -sort( -diag(sample_cov), partial = 2)[1:2])
@@ -15,9 +14,7 @@ create_lambda = function(sample_cov,
 }
 
 
-prepare_lambda = function(lambda, p) {
-
-  low_tri_size = p * (p - 1) / 2
+prepare_lambda = function(lambda, low_tri_size) {
 
   lambda = sort(lambda, decreasing = T)
 

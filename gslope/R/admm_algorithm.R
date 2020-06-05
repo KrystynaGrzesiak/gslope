@@ -5,10 +5,12 @@ source("R\\prox_matrix.R")
 ADMM_algorithm = function(sample_cov,
                           lambda,
                           mu,
-                          Y,
-                          Z,
                           max_iter,
                           epsilon) {
+
+  Z = sample_cov * 0
+  Y = Z
+  X = diag(nrow(sample_cov))
 
   for(n in 1:max_iter) {
     C_tilde = Y - Z - sample_cov / mu
@@ -31,6 +33,5 @@ ADMM_algorithm = function(sample_cov,
       break
   }
 
-  X[abs(X) < epsilon] = 0 # round to 0 before scaling?
   list(X, n)
 }

@@ -8,7 +8,7 @@ gslope = function(data, lambda = create_lambda(cov(data), ncol(data),
                   mu = 1.1, max_iter = 1e5, epsilon = 1e-4, alpha = 0.05) {
   #prepare parameters:
   p = ncol(data)
-  n = nrow(data)
+  sample_cov = cov(data)
   lambda = prepare_lambda(lambda, p)
   if(!scaled) {data = scale(data)}
 

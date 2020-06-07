@@ -1,23 +1,39 @@
 
-source("R\\prox_matrix.R")
+
+
+#TODO: sprawdzić jak dodać bibliotekę SLOPE do pakietu
+#' @importFrom SLOPE "prox_sorted_L1"
+
+
+prox_matrix = function(matrix_in, lambda) {
+  out = matrix_in
+  precision_entries = matrix_in[lower.tri(matrix_in, FALSE)]
+  calculated_entries = suppressWarnings(SLOPE::prox_sorted_L1(abs(precision_entries),
+                                                              lambda, method = c("c")))
+  out[lower.tri(out, FALSE)] = calculated_entries
+  out[upper.tri(out, FALSE)] = calculated_entries
+  out
+}
 
 
 ADMM_algorithm = function(sample_cov, lambda, mu, max_iter, epsilon) {
-
+  if(!(nrow(sample_cov) == ncol(sample_cov))) stop("Covariance matrix must be square.")
   Z = sample_cov * 0
   Y = Z
   X = diag(nrow(sample_cov))
 
-  for(n in 1:max_iter) {
+  for(iter in 1:max_iter) {
     C_tilde = Y - Z - sample_cov / mu
     C_eigen = eigen(C_tilde, symmetric = TRUE)
     C_eigen_val = C_eigen$val
     C_eigen_vec = C_eigen$vec
-    F_mu = 1 / 2 * diag(C_eigen_val + sqrt(C_eigen_val * C_eigen_val + 4 / mu))
 
+    F_mu = 1 / 2 * diag(C_eigen_val + sqrt(C_eigen_val * C_eigen_val + 4 / mu))
     X = C_eigen_vec %*% F_mu %*% t(C_eigen_vec)
+
     Y_old = Y
     Y = prox_matrix(X + Z, lambda / mu)
+
     Z = Z + mu * (X - Y)
 
     primal_residual = norm(X - Y, type = "F")
@@ -26,5 +42,5 @@ ADMM_algorithm = function(sample_cov, lambda, mu, max_iter, epsilon) {
     if(primal_residual < epsilon & dual_residual < epsilon)
       break
   }
-  list(X, n)
+  list(X, iter)
 }

@@ -1,14 +1,30 @@
 
+
 source("R\\admm_algorithm.R")
-source("R\\lambda.R")
+source("R\\create_lambda.R")
 
 
-gslope = function(data, lambda = create_lambda(cov(data), ncol(data),
-                                               nrow(data), alpha), scaled = FALSE
-                  mu = 1.1, max_iter = 1e5, epsilon = 1e-4, alpha = 0.05) {
+prepare_lambda = function(lambda, low_tri_size) {
+  lambda = sort(lambda, decreasing = T)
+  if(length(lambda) < low_tri_size) {
+    warning("The length of lambda is less than ncol(data) * (ncol(data)-1)/2.
+        Zeros will be added.", immediate. = FALSE)
+    lambda = c(lambda, rep(0, low_tri_size - length(lambda)))
+  }
+  else if(length(lambda) > low_tri_size) {
+    warning("The length of lambda is greater than ncol(data) * (ncol(data)-1)/2.
+        Lambda will be cut to the proper length.", immediate. = FALSE)
+    lambda = lambda[1:low_tri_size]
+  }
+  lambda
+}
+
+
+gslope = function(data, lambda = gslope::create_lambda(sample_cov, nrow(data), alpha),
+                  sample_cov = cov(data), scaled = FALSE, mu = 1.1,
+                  max_iter = 1e5, epsilon = 1e-4, alpha = 0.05) {
   #prepare parameters:
   p = ncol(data)
-  sample_cov = cov(data)
   lambda = prepare_lambda(lambda, p)
   if(!scaled) {data = scale(data)}
 
@@ -24,7 +40,3 @@ gslope = function(data, lambda = create_lambda(cov(data), ncol(data),
        lambda = lambda,
        iterations = ADMM_results[[2]])
 }
-
-
-
-

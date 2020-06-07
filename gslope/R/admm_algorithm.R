@@ -2,11 +2,7 @@
 source("R\\prox_matrix.R")
 
 
-ADMM_algorithm = function(sample_cov,
-                          lambda,
-                          mu,
-                          max_iter,
-                          epsilon) {
+ADMM_algorithm = function(sample_cov, lambda, mu, max_iter, epsilon) {
 
   Z = sample_cov * 0
   Y = Z
@@ -20,10 +16,8 @@ ADMM_algorithm = function(sample_cov,
     F_mu = 1 / 2 * diag(C_eigen_val + sqrt(C_eigen_val * C_eigen_val + 4 / mu))
 
     X = C_eigen_vec %*% F_mu %*% t(C_eigen_vec)
-
     Y_old = Y
     Y = prox_matrix(X + Z, lambda / mu)
-
     Z = Z + mu * (X - Y)
 
     primal_residual = norm(X - Y, type = "F")
@@ -32,6 +26,5 @@ ADMM_algorithm = function(sample_cov,
     if(primal_residual < epsilon & dual_residual < epsilon)
       break
   }
-
   list(X, n)
 }

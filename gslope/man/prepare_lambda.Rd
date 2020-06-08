@@ -23,8 +23,8 @@ In case of vector lambda being too short, it is filled with zeros up to the set 
 }
 \examples{
 v <- sample(1:100,10)
-lambda(v,10)
-lambda(v,5)
-lambda(v,17)
+prepare_lambda(v,10)
+prepare_lambda(v,5)
+prepare_lambda(v,17)
 }
 \keyword{lambda}

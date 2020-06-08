@@ -36,7 +36,7 @@ gslope(
 \code{gslope} returns a list containing following components:
 \item{precision_matrix}{a precision matrix revealing graph structure for the data.}
 \item{covariance_matrix}{covariance matrix equal to the inverse of the presicion matrix.}
-\item{scaled_precision_matrix}{precision matrix scaled so that it has ones on a diagonal.}
+\item{scaled_precision_matrix}{...}
 \item{lambda}{a vector of penalty parameters used in SLOPE.}
 \item{iterations}{a number of iterations performed in ADMM algorithm.}
 }
@@ -44,12 +44,12 @@ gslope(
 Computes precision matrix for graph models using graphical SLOPE.
 }
 \details{
-gslope selects high probability graph structure for graphical model with likelihood-based methods combined with ordered L1-regularization. Namely, it solves - using ADMM algorithm - the following  maximization problem:
+\code{gslope} selects high probability graph structure for graphical model with likelihood-based methods combined with ordered L1-regularization. Namely, it solves - using ADMM algorithm - the following  maximization problem:
 \deqn{ log det \Theta - tr(S \Theta) - \lambda(\Theta), subject to \Theta \in S+,}
 where S is a sample covariance matrix, \eqn{\lambda(\Theta)} is a series of regularizers for SLOPE and S+ denotes a set of symmetric, semidefinite matrices.
 }
 \examples{
-Ni ma
+gslope(mtcars, epsilon = 1e-3)
 }
 \keyword{graphical}
 \keyword{matrix,}

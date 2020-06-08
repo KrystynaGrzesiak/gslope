@@ -16,7 +16,29 @@ prox_matrix = function(matrix_in, lambda) {
 }
 
 
-ADMM_algorithm = function(sample_cov, lambda, mu, max_iter, epsilon) {
+#' @title ADMM algorithm for graphical SLOPE
+#' @description  Executes ADMM algorithm to find precision matrix.
+#' @param sample_cov Variance-covariance matrix.
+#' @param lambda vector of SLOPE regularizers.
+#' @param mu Correction for scaling lambda.
+#' @param max_iter Maximum number of iterations of ADMM algorithm. Default 10 000.
+#' @param epsilon Value determining stop condition.
+#' @keywords
+#' @return \code{ADMM_algorithm} A list with components:
+#' \item{precision_matrix}{precision matrix revealing graph structure for the data.}
+#' \item{iterations}{number of iterations before stop condition or \code{max_iter}.}
+#' @details
+#' @examples
+#' sample_cov = cov(scale(mtcars))
+#' lambda = gslope::create_lambda(sample_cov, nrow(mtcars))
+#' precision_matrix = ADMM_algorithm(sample_cov, lambda)
+#' @export
+#'
+
+
+
+ADMM_algorithm = function(sample_cov, lambda, mu = 1.1,
+                          max_iter = 1e4, epsilon = 1e-4) {
   if(!(nrow(sample_cov) == ncol(sample_cov))) stop("Covariance matrix must be square.")
   Z = sample_cov * 0
   Y = Z
@@ -37,10 +59,11 @@ ADMM_algorithm = function(sample_cov, lambda, mu, max_iter, epsilon) {
     Z = Z + mu * (X - Y)
 
     primal_residual = norm(X - Y, type = "F")
-    dual_residual   = norm(mu * (Y - Y_old), type = "F")
+    dual_residual = norm(mu * (Y - Y_old), type = "F")
 
     if(primal_residual < epsilon & dual_residual < epsilon)
       break
   }
-  list(X, iter)
+  list(precision_matrix = X,
+       iterations = iter)
 }

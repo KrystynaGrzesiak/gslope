@@ -12,9 +12,9 @@ source("R\\create_lambda.R")
 #' @details In case of vector lambda being too short, it is filled with zeros up to the set length. If the vector is too long, it is cut to the proper size.
 #' @examples
 #' v <- sample(1:100,10)
-#' lambda(v,10)
-#' lambda(v,5)
-#' lambda(v,17)
+#' prepare_lambda(v,10)
+#' prepare_lambda(v,5)
+#' prepare_lambda(v,17)
 #' @export
 
 prepare_lambda = function(lambda, low_tri_size) {
@@ -47,7 +47,7 @@ prepare_lambda = function(lambda, low_tri_size) {
 #' @return \code{gslope} returns a list containing following components:
 #' \item{precision_matrix}{a precision matrix revealing graph structure for the data.}
 #' \item{covariance_matrix}{covariance matrix equal to the inverse of the presicion matrix.}
-#' \item{scaled_precision_matrix}{precision matrix scaled so that it has ones on a diagonal.}
+#' \item{scaled_precision_matrix}{...}
 #' \item{lambda}{a vector of penalty parameters used in SLOPE.}
 #' \item{iterations}{a number of iterations performed in ADMM algorithm.}
 #' @details \code{gslope} selects high probability graph structure for graphical model with likelihood-based methods combined with ordered L1-regularization. Namely, it solves - using ADMM algorithm - the following  maximization problem:
@@ -56,13 +56,13 @@ prepare_lambda = function(lambda, low_tri_size) {
 #' @examples
 #' gslope(mtcars, epsilon = 1e-3)
 ## TODO: jakis przykladzik
+## TODO: co to jest scaled_precision matrix?????
 #' @export
 #'
 
 gslope = function(data, lambda = gslope::create_lambda(sample_cov, nrow(data), alpha),
                   sample_cov = cov(data), scaled = FALSE, mu = 1.1,
                   max_iter = 1e5, epsilon = 1e-4, alpha = 0.05) {
-  #prepare parameters:
   p = ncol(data)
   lambda = prepare_lambda(lambda, p*(p-1)/2)
   if(!scaled) {data = scale(data)}

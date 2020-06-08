@@ -1,15 +1,16 @@
 #' @title Penalty parameters for graphical SLOPE
 #' @description  Computes penalty parameters \eqn{\lambda} for graphical SLOPE.
-#' @param sample_cov Variance-covariance matrix.
-#' @param n Number of observations.
-#' @param alpha Significance level.
+#' @param sample_cov a sample variance-covariance matrix.
+#' @param n number of observations.
+#' @param alpha significance level.
 #' @keywords lambda, graphical slope, penalty
-#' @return \code{create_lambda()} returns a vector of length \eqn{n * (n-1)/2}, which is  equal
+#' @return \code{create_lambda()} returns a vector of the length \eqn{p * (p-1)/2}, which is equal
 #' to number of elements in lower (upper) triangle of a variance-covariance matrix excluding diagonal.
 #' @details The Lambda series are computed based on Benjamini-Hochberg's correction.
 #' @examples
 #' sample_cov = cov(scale(mtcars))
 #' create_lambda(sample_cov, nrow(mtcars))
+#' @export
 
 
 create_lambda = function(sample_cov, n, alpha = 0.05) {

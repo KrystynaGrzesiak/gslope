@@ -7,14 +7,14 @@
 create_lambda(sample_cov, n, alpha = 0.05)
 }
 \arguments{
-\item{sample_cov}{Variance-covariance matrix.}
+\item{sample_cov}{a sample variance-covariance matrix.}
 
-\item{n}{Number of observations.}
+\item{n}{number of observations.}
 
-\item{alpha}{Significance level.}
+\item{alpha}{significance level.}
 }
 \value{
-\code{create_lambda(with = "arguments")} returns a vector of length n * (n-1)/2, which is  equal
+\code{create_lambda()} returns a vector of the length \eqn{p * (p-1)/2}, which is equal
 to number of elements in lower (upper) triangle of a variance-covariance matrix excluding diagonal.
 }
 \description{

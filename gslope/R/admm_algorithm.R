@@ -18,11 +18,11 @@ prox_matrix = function(matrix_in, lambda) {
 
 #' @title ADMM algorithm for graphical SLOPE
 #' @description  Executes ADMM algorithm to find precision matrix.
-#' @param sample_cov Variance-covariance matrix.
+#' @param sample_cov variance-covariance matrix.
 #' @param lambda vector of SLOPE regularizers.
-#' @param mu Correction for scaling lambda.
-#' @param max_iter Maximum number of iterations of ADMM algorithm. Default 10 000.
-#' @param epsilon Value determining stop condition.
+#' @param mu correction for scaling lambda.
+#' @param max_iter maximum number of iterations of ADMM algorithm. Default 10 000.
+#' @param epsilon a value determining stop condition.
 #' @keywords
 #' @return \code{ADMM_algorithm} A list with components:
 #' \item{precision_matrix}{precision matrix revealing graph structure for the data.}

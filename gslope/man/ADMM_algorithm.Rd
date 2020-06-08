@@ -7,15 +7,15 @@
 ADMM_algorithm(sample_cov, lambda, mu = 1.1, max_iter = 10000, epsilon = 1e-04)
 }
 \arguments{
-\item{sample_cov}{Variance-covariance matrix.}
+\item{sample_cov}{variance-covariance matrix.}
 
 \item{lambda}{vector of SLOPE regularizers.}
 
-\item{mu}{Correction for scaling lambda.}
+\item{mu}{correction for scaling lambda.}
 
-\item{max_iter}{Maximum number of iterations of ADMM algorithm. Default 10 000.}
+\item{max_iter}{maximum number of iterations of ADMM algorithm. Default 10 000.}
 
-\item{epsilon}{Value determining stop condition.}
+\item{epsilon}{a value determining stop condition.}
 }
 \value{
 \code{ADMM_algorithm} A list with components:

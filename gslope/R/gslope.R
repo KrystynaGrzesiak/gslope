@@ -57,19 +57,20 @@ prepare_lambda = function(lambda, low_tri_size) {
 #' Ni ma
 ## TODO: jakis przykladzik
 #' @export
+#'
 
 gslope = function(data, lambda = gslope::create_lambda(sample_cov, nrow(data), alpha),
                   sample_cov = cov(data), scaled = FALSE, mu = 1.1,
                   max_iter = 1e5, epsilon = 1e-4, alpha = 0.05) {
   #prepare parameters:
   p = ncol(data)
-  lambda = prepare_lambda(lambda, p)
+  lambda = prepare_lambda(lambda, p*(p-1)/2)
   if(!scaled) {data = scale(data)}
 
   ADMM_results = ADMM_algorithm(sample_cov, lambda, mu, max_iter, epsilon)
 
   precision_matrix = ADMM_results[[1]]
-  precision_matrix[abs(precision_matrix) < epsilon] = 0 # rounding to 0 before scaling?
+  precision_matrix[abs(precision_matrix) < epsilon] = 0
   scaled_precision_matrix = -cov2cor(precision_matrix)
 
   list(precision_matrix = precision_matrix,

@@ -40,9 +40,9 @@ plot = function(x, plt = "precision", col = "black"){
   if(plt == "precision") {
     print("halo")
     precision_matrix = x$precision_matrix
-    x = colnames(precision_matrix)
-    y = x
-    data = expand.grid(X = x, Y = y)
+    X = colnames(precision_matrix)
+    y = X
+    data = expand.grid(X = X, Y = y)
     data$value = c(precision_matrix)
     
     result = ggplot(data, mapping = aes(X, Y, fill = value)) + 
@@ -54,7 +54,7 @@ plot = function(x, plt = "precision", col = "black"){
       theme(plot.title = element_text(hjust = 0.5))
   }
   if(plt == "corr") {
-    result = ggcorr(cov2cor(result$covariance_matrix), 
+    result = ggcorr(cov2cor(x$covariance_matrix), 
            nbreaks = 5, 
            low = col, 
            high = col)+
@@ -62,7 +62,7 @@ plot = function(x, plt = "precision", col = "black"){
       theme(plot.title = element_text(hjust = 0.5))
   }
   if(plt == "scaled_precision") {
-    result = ggcorr(result$scaled_precision_matrix, 
+    result = ggcorr(x$scaled_precision_matrix, 
            nbreaks = 5, 
            low = col, 
            high = col)+

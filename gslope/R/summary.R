@@ -1,20 +1,21 @@
-#' @title Prints summary from gslope
+#' @title Prints all parameters from gslope
 #'
 #' @param x an object of class `'gslope'`
 #'
 #' @return Prints output on the screen
 #'
 #' @examples
-#' bla bla
-#'
+#' d=gslope(as.matrix(mtcars))
+#' summary(d)
+#' 
 #' @export
-print <- function(x){
-  UseMethod("print")
+summary <- function(x){
+  UseMethod("summary")
 }
 
-#' @rdname print
+#' @rdname summary
 #' @export
-print.gslope <- function(x){
+summary.gslope <- function(x){
   cat("Call:\n\n")
   print(x$call)
   cat("---\n\n Sparse precision matrix:\n\n")
@@ -25,8 +26,6 @@ print.gslope <- function(x){
   print(x$scaled_precision_matrix)
   cat("---\n\n Lambda regularizers used:\n\n")
   print(x$lambda)
-  cat("---\n\n Number of iteration (ADMM):\n\n")
+  cat("---\n\n Number of iterations (ADMM):\n\n")
   print(x$iterations)
 }
-
-

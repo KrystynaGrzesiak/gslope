@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' w = gslope(as.matrix(mtcars))
-#' plot.igraph(w)
+#' graph_plot(w)
 #' @export
 
 graph_plot <- function(x){

@@ -23,11 +23,11 @@ prox_matrix = function(matrix_in, lambda) {
 #' @param mu correction for scaling lambda.
 #' @param max_iter maximum number of iterations of ADMM algorithm. Default 10 000.
 #' @param epsilon a value determining stop condition.
-#' @keywords
+#' @keywords TODO: keywords
 #' @return \code{ADMM_algorithm} A list with components:
 #' \item{precision_matrix}{precision matrix revealing graph structure for the data.}
 #' \item{iterations}{number of iterations before stop condition or \code{max_iter}.}
-#' @details
+#' @details #TODO: details
 #' @examples
 #' sample_cov = cov(scale(mtcars))
 #' lambda = gslope::create_lambda(sample_cov, nrow(mtcars))

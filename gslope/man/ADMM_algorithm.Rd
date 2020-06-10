@@ -25,8 +25,13 @@ ADMM_algorithm(sample_cov, lambda, mu = 1.1, max_iter = 10000, epsilon = 1e-04)
 \description{
 Executes ADMM algorithm to find precision matrix.
 }
+\details{
+#TODO: details
+}
 \examples{
 sample_cov = cov(scale(mtcars))
 lambda = gslope::create_lambda(sample_cov, nrow(mtcars))
 precision_matrix = ADMM_algorithm(sample_cov, lambda)
 }
+\keyword{TODO:}
+\keyword{keywords}

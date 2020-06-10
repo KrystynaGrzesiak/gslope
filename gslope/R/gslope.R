@@ -1,6 +1,5 @@
-source("R\\admm_algorithm.R")
-source("R\\create_lambda.R")
-
+#' @importFrom igraph "graph_from_adjacency_matrix"
+#' @importFrom igraph "clusters"
 
 #' @title Preparation of lambda
 #' @description  Prepares penalty parameters \eqn{\lambda} for further computations in graphical SLOPE.
@@ -51,6 +50,8 @@ prepare_lambda = function(lambda, low_tri_size) {
 #' \item{scaled_precision_matrix}{...}
 #' \item{lambda}{a vector of penalty parameters used in SLOPE.}
 #' \item{iterations}{a number of iterations performed in ADMM algorithm.}
+#' \item{graph}{a graph based on precision matrix.}
+#' \item{clusters}{aconnected entries of a graph.}
 #' @details \code{gslope} selects high probability graph structure for graphical model with likelihood-based methods combined with ordered L1-regularization. Namely, it solves - using ADMM algorithm - the following  maximization problem:
 #' \deqn{ log det \Theta - tr(S \Theta) - \lambda(\Theta), subject to \Theta \in S+,}
 #' where S is a sample covariance matrix, \eqn{\lambda(\Theta)} is a series of regularizers for SLOPE and S+ denotes a set of symmetric, semidefinite matrices.
@@ -88,12 +89,22 @@ gslope = function(data,
 
   precision_matrix[abs(precision_matrix) < threshold] = 0
   scaled_precision_matrix = -cov2cor(precision_matrix)
+  
+  
+  graph = graph_from_adjacency_matrix(precision_matrix, 
+                                      mode = c("undirected"), 
+                                      weighted = TRUE,
+                                      diag = FALSE, 
+                                      add.colnames = NULL, 
+                                      add.rownames = NA)
 
   result = list(precision_matrix = precision_matrix,
                 covariance_matrix = solve(precision_matrix),
                 scaled_precision_matrix = scaled_precision_matrix,
                 lambda = lambda,
                 iterations = ADMM_results[[2]],
+                graph = graph,
+                clusters = clusters(graph),
                 call = call)
   class(result) <- "gslope"
   result

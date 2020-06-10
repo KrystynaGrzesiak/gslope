@@ -26,7 +26,7 @@
 
 #' @export
 
-plot <- function(x, col){
+plot <- function(x, plt, col){
   UseMethod('plot')
 }
 
@@ -38,7 +38,6 @@ plot = function(x, plt = "precision", col = "black"){
   if(!(plt %in% c("precision", "corr", "scaled_precision"))) stop("Plt must be either precision, corr or scaled_precision")
 
   if(plt == "precision") {
-    print("halo")
     precision_matrix = x$precision_matrix
     X = colnames(precision_matrix)
     y = X

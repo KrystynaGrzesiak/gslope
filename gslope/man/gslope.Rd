@@ -42,6 +42,8 @@ gslope(
 \item{scaled_precision_matrix}{...}
 \item{lambda}{a vector of penalty parameters used in SLOPE.}
 \item{iterations}{a number of iterations performed in ADMM algorithm.}
+\item{graph}{a graph based on precision matrix.}
+\item{clusters}{aconnected entries of a graph.}
 }
 \description{
 Computes precision matrix for graph models using graphical SLOPE.

@@ -8,15 +8,12 @@
 #' bla bla
 #'
 #' @export
-#'
-
 coef <- function(x){
-  UseMethod('coef')
+  UseMethod("coef")
 }
 
-#'
+#' @rdname coef
 #' @export
-#'
 coef.gslope <- function(x){
-  return(x$precision_matrix)
+  print(x$precision_matrix)
 }

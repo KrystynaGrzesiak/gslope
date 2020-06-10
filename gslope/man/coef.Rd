@@ -2,9 +2,12 @@
 % Please edit documentation in R/coef.R
 \name{coef}
 \alias{coef}
+\alias{coef.gslope}
 \title{Prints precision matrix from gslope}
 \usage{
 coef(x)
+
+\method{coef}{gslope}(x)
 }
 \arguments{
 \item{x}{an object of class `'gslope'`}

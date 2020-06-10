@@ -4,12 +4,16 @@
 \alias{plot}
 \title{Plot precision matrix}
 \usage{
-plot(x, col)
+plot(x, plt = "precision", col = "black")
+
+plot(x, plt = "precision", col = "black")
 }
 \arguments{
 \item{x}{an object of class `'gslope'`}
 
-\item{col}{a character, plot color. Default "black".}
+\item{plt}{a plot type. Accepts either \code{'precision'}, \code{'corr'} or \code{'scaled_precision'}. Default \code{'precision'}.}
+
+\item{col}{a character, color name. Default "black"}
 }
 \value{
 Prints output on the screen
@@ -18,5 +22,8 @@ Prints output on the screen
 Plot precision matrix
 }
 \examples{
-bla bla
+w = gslope(as.matrix(mtcars))
+plot(w, col = "green", plt = "precision")
+plot(w, plt = "corr")
+plot(w,  col = "purple", plt = "scaled_precision")
 }

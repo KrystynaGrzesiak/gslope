@@ -72,6 +72,7 @@ gslope = function(data,
                   threshold = 1e-4,
                   alpha = 0.05) {
 
+  call = match.call()
   names = colnames(data)
   sample_cov = if(!scaled) cov(scale(data)) else cov(data)
   lambda = if(is.null(lambda)) gslope::create_lambda(sample_cov, nrow(data), alpha)
@@ -92,7 +93,8 @@ gslope = function(data,
                 covariance_matrix = solve(precision_matrix),
                 scaled_precision_matrix = scaled_precision_matrix,
                 lambda = lambda,
-                iterations = ADMM_results[[2]])
+                iterations = ADMM_results[[2]],
+                call = call)
   class(result) <- "gslope"
   result
 }

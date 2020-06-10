@@ -40,8 +40,9 @@ prepare_lambda = function(lambda, low_tri_size) {
 #' @param sample_cov variance-covariance matrix.
 #' @param scaled logical. The data need to be scaled so that it has mean = 0 and variance = 1. If TRUE, build-in data scaling will be omitted.
 #' @param mu ## TODO:  czo to?
-#' @param max_iter maximum number of iterations allowed in ADMM algorithm.
-#' @param epsilon a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked.
+#' @param max_iter maximum number of iterations allowed in ADMM algorithm. Default 10 000.
+#' @param threshold a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked. Default 10e-4.
+#' @param epsilon a value used to determine accuracy of the ADMM algorithm. Default 10e-4.
 #' @param alpha significance level.
 #' @keywords precision matrix, graphical slope
 #' @return \code{gslope} returns a list containing following components:
@@ -66,10 +67,12 @@ gslope = function(data,
                   sample_cov = cov(data),
                   scaled = FALSE,
                   mu = 1.1,
-                  max_iter = 1e5,
+                  max_iter = 1e4,
                   epsilon = 1e-4,
+                  threshold = 1e-4,
                   alpha = 0.05) {
 
+  names = colnames(data)
   sample_cov = if(!scaled) cov(scale(data)) else cov(data)
   lambda = if(is.null(lambda)) gslope::create_lambda(sample_cov, nrow(data), alpha)
 
@@ -79,7 +82,10 @@ gslope = function(data,
   ADMM_results = ADMM_algorithm(sample_cov, lambda, mu, max_iter, epsilon)
 
   precision_matrix = ADMM_results[[1]]
-  precision_matrix[abs(precision_matrix) < epsilon] = 0
+  rownames(precision_matrix) = names
+  colnames(precision_matrix) = names
+
+  precision_matrix[abs(precision_matrix) < threshold] = 0
   scaled_precision_matrix = -cov2cor(precision_matrix)
 
   list(precision_matrix = precision_matrix,
@@ -88,3 +94,5 @@ gslope = function(data,
        lambda = lambda,
        iterations = ADMM_results[[2]])
 }
+
+

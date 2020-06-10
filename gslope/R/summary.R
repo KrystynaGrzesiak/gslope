@@ -1,3 +1,7 @@
+
+#' @importFrom igraph "graph_from_adjacency_matrix"
+#' @importFrom igraph "cluster_optimal"
+
 #' @title Prints all parameters from gslope
 #'
 #' @param x an object of class `'gslope'`
@@ -28,4 +32,10 @@ summary.gslope <- function(x){
   print(x$lambda)
   cat("---\n\n Number of iterations (ADMM):\n\n")
   print(x$iterations)
+  cat("---\n\n Clusters:\n\n")
+  precision = x$precision_matrix
+  precision[precision != 0] = 1
+  graph = graph_from_adjacency_matrix(precision, mode = c("undirected"), weighted = NULL,
+                                      diag = TRUE, add.colnames = NULL, add.rownames = NA)
+  print(cluster_optimal(graph))
 }

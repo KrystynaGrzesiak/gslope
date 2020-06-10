@@ -6,12 +6,13 @@
 \usage{
 gslope(
   data,
-  lambda = gslope::create_lambda(sample_cov, nrow(data), alpha),
+  lambda = NULL,
   sample_cov = cov(data),
   scaled = FALSE,
   mu = 1.1,
-  max_iter = 1e+05,
+  max_iter = 10000,
   epsilon = 1e-04,
+  threshold = 1e-04,
   alpha = 0.05
 )
 }
@@ -26,9 +27,11 @@ gslope(
 
 \item{mu}{## TODO:  czo to?}
 
-\item{max_iter}{maximum number of iterations allowed in ADMM algorithm.}
+\item{max_iter}{maximum number of iterations allowed in ADMM algorithm. Default 10 000.}
 
-\item{epsilon}{a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked.}
+\item{epsilon}{a value used to determine accuracy of the ADMM algorithm. Default 10e-4.}
+
+\item{threshold}{a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked. Default 10e-4.}
 
 \item{alpha}{significance level.}
 }

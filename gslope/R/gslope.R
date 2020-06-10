@@ -88,11 +88,13 @@ gslope = function(data,
   precision_matrix[abs(precision_matrix) < threshold] = 0
   scaled_precision_matrix = -cov2cor(precision_matrix)
 
-  list(precision_matrix = precision_matrix,
-       covariance_matrix = solve(precision_matrix),
-       scaled_precision_matrix = scaled_precision_matrix,
-       lambda = lambda,
-       iterations = ADMM_results[[2]])
+  result = list(precision_matrix = precision_matrix,
+                covariance_matrix = solve(precision_matrix),
+                scaled_precision_matrix = scaled_precision_matrix,
+                lambda = lambda,
+                iterations = ADMM_results[[2]])
+  class(result) <- "gslope"
+  result
 }
 
 

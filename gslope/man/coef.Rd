@@ -19,6 +19,7 @@ Prints output on the screen
 Prints precision matrix from gslope
 }
 \examples{
-bla bla
+w = gslope(as.matrix(mtcars))
+coef(w)
 
 }

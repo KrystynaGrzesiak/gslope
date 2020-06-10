@@ -5,7 +5,8 @@
 #' @return Prints output on the screen
 #'
 #' @examples
-#' bla bla
+#' w = gslope(as.matrix(mtcars))
+#' coef(w)
 #'
 #' @export
 coef <- function(x){

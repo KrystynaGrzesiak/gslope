@@ -62,8 +62,7 @@ prepare_lambda = function(lambda, low_tri_size) {
 
 
 gslope = function(data,
-                  sample_cov = if(!scaled) cov(scale(data)) else cov(data),
-                  lambda = gslope::create_lambda(sample_cov, nrow(data), alpha),
+                  lambda = NULL,
                   sample_cov = cov(data),
                   scaled = FALSE,
                   mu = 1.1,
@@ -71,9 +70,11 @@ gslope = function(data,
                   epsilon = 1e-4,
                   alpha = 0.05) {
 
+  sample_cov = if(!scaled) cov(scale(data)) else cov(data)
+  lambda = if(is.null(lambda)) gslope::create_lambda(sample_cov, nrow(data), alpha)
+
   p = ncol(data)
   lambda = prepare_lambda(lambda, p*(p-1)/2)
-  if(!scaled) {data = scale(data)}
 
   ADMM_results = ADMM_algorithm(sample_cov, lambda, mu, max_iter, epsilon)
 

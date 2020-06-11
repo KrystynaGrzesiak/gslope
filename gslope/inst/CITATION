@@ -1,0 +1,22 @@
+citHeader("To cite gslope in publications use:")
+
+c(
+bibentry(
+  bibtype    = "Manual",
+  title    = "gslope: Graphical SLOPE",
+  author   = c(
+    person("Krystyna", "Grzesiak"),
+    person("Zofia", "Dziedzic"),
+    person("Tomasz", "Kulik"),
+    person("Michał", "Makowski")
+  ),
+  year     = "2020",
+),
+
+bibentry(
+  bibtype    = "MastersThesis",
+  title    = "Precision matrix estimation in Gaussian graphical models",
+  author   = person("Michał","Makowski"),
+  year     = "2018",
+  school   = "Uniwersytet Wrocławski",
+))

@@ -7,7 +7,6 @@
 gslope(
   data,
   lambda = NULL,
-  sample_cov = cov(data),
   scaled = FALSE,
   mu = 1.1,
   max_iter = 10000,
@@ -21,8 +20,6 @@ gslope(
 
 \item{lambda}{vector of regularizers for SLOPE. By default computed based on Benjamini-Hochberg's method.}
 
-\item{sample_cov}{variance-covariance matrix.}
-
 \item{scaled}{logical. The data need to be scaled so that it has mean = 0 and variance = 1. If TRUE, build-in data scaling will be omitted.}
 
 \item{mu}{## TODO:  czo to?}
@@ -34,6 +31,8 @@ gslope(
 \item{threshold}{a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked. Default 10e-4.}
 
 \item{alpha}{significance level.}
+
+\item{sample_cov}{variance-covariance matrix.}
 }
 \value{
 \code{gslope} returns a list containing following components:
@@ -55,6 +54,11 @@ where S is a sample covariance matrix, \eqn{\lambda(\Theta)} is a series of regu
 }
 \examples{
 gslope(mtcars, epsilon = 1e-3)
+}
+\references{
+Makowski, M., (2018).
+Precision matrix estimation in Gaussian graphical models.
+Master's Thesis. Uniwersytet Wroclawski.
 }
 \keyword{graphical}
 \keyword{matrix,}

@@ -59,13 +59,14 @@ prepare_lambda = function(lambda, low_tri_size) {
 #' gslope(mtcars, epsilon = 1e-3)
 ## TODO: jakis przykladzik
 ## TODO: co to jest scaled_precision matrix?????
+#' @references Makowski, M., (2018).
+#' Precision matrix estimation in Gaussian graphical models.
+#' Master's Thesis. Uniwersytet Wroclawski.
 #' @export
-#'
 
 
 gslope = function(data,
                   lambda = NULL,
-                  sample_cov = cov(data),
                   scaled = FALSE,
                   mu = 1.1,
                   max_iter = 1e4,
@@ -89,13 +90,13 @@ gslope = function(data,
 
   precision_matrix[abs(precision_matrix) < threshold] = 0
   scaled_precision_matrix = -cov2cor(precision_matrix)
-  
-  
-  graph = graph_from_adjacency_matrix(precision_matrix, 
-                                      mode = c("undirected"), 
+
+
+  graph = graph_from_adjacency_matrix(precision_matrix,
+                                      mode = c("undirected"),
                                       weighted = TRUE,
-                                      diag = FALSE, 
-                                      add.colnames = NULL, 
+                                      diag = FALSE,
+                                      add.colnames = NULL,
                                       add.rownames = NA)
 
   result = list(precision_matrix = precision_matrix,

@@ -6,7 +6,7 @@
 #' @return Prints output on the screen
 #'
 #' @examples
-#' d=gslope(as.matrix(mtcars))
+#' d = gslope(as.matrix(mtcars))
 #' summary(d)
 #' 
 #' @export

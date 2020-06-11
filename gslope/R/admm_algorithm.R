@@ -1,7 +1,3 @@
-
-
-
-#TODO: sprawdzić jak dodać bibliotekę SLOPE do pakietu
 #' @importFrom SLOPE "prox_sorted_L1"
 
 

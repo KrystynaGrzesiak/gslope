@@ -29,9 +29,18 @@ test_that("prepare_lambda warns about too long lambda", {
 })
 
 
-test_that("gslope returns list of 8 elements", {
-  gslope_result = gslope(scale(mtcars), scaled = TRUE)
-  expect_length(gslope_result, 8)
+test_that("prepared lambda is sorted in descending order", {
+  sample_cov = cov(scale(mtcars))
+  n = nrow(mtcars)
+  lambda = create_lambda(sample_cov, n)
+  p = nrow(sample_cov)
+  expect_true(!is.unsorted(rev(prepare_lambda(lambda, p*(p-1)/2))))
 })
 
+
+test_that("gslope returns an instance of the class gslope", {
+  gslope_result = gslope(scale(mtcars), scaled = TRUE)
+  expect_true(class(gslope_result) == "gslope")
+  expect_length(gslope_result, 8)
+})
 

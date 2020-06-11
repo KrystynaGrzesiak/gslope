@@ -33,7 +33,7 @@ plot <- function(x, plt, col){
 #' @rdname plot
 #' @export
 #'
-plot = function(x, plt = "precision", col = "black"){
+plot.gslope = function(x, plt = "precision", col = "black"){
   
   if(!(plt %in% c("precision", "corr", "scaled_precision"))) stop("Plt must be either precision, corr or scaled_precision")
 

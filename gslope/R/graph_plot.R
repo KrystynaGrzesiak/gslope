@@ -20,7 +20,7 @@ graph_plot <- function(x){
 #' @rdname graph_plot
 #' @export
 #'
-graph_plot = function(x){
+graph_plot.gslope = function(x){
   graph = x$graph
   plot.igraph(graph,layout = layout.circle, vertex.size = 25)
 }

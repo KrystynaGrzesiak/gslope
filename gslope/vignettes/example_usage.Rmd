@@ -1,0 +1,26 @@
+---
+title: "example_usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{example_usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE, fig.align='center', fig.height=5, fig.width= 6}
+library(gslope)
+
+d = gslope(mtcars)
+summary(d)
+coef(d)
+graph_plot(d)
+plot(d, col = "navy", plt = "corr")
+plot(d, plt = "precision")
+```

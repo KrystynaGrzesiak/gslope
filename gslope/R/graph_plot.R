@@ -1,5 +1,6 @@
 #' @importFrom igraph "graph_from_adjacency_matrix"
 #' @importFrom igraph "plot.igraph"
+#' @importFrom igraph "layout.circle"
 
 #' @title Plot graph for gslope.
 #'

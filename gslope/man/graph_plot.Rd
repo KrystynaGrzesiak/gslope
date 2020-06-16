@@ -2,11 +2,12 @@
 % Please edit documentation in R/graph_plot.R
 \name{graph_plot}
 \alias{graph_plot}
+\alias{graph_plot.gslope}
 \title{Plot graph for gslope.}
 \usage{
 graph_plot(x)
 
-graph_plot(x)
+\method{graph_plot}{gslope}(x)
 }
 \arguments{
 \item{x}{an object of class `'gslope'`}

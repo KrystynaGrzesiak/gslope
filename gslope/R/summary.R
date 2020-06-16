@@ -3,12 +3,22 @@
 #'
 #' @param x an object of class `'gslope'`
 #'
-#' @return Prints output on the screen
+#' @return Prints following output on the screen:
+#' \itemize{
 #'
+#' \item \code{call} formula used in function call.
+#' \item \code{precision matrix} a sparse precision matrix
+#' \item \code{covariance matrix} covariance matrix for the data
+#' \item \code{scaled precision matrix} see: ?gslope
+#' \item \code{lambda} lambda regularizers used
+#' \item \code{iterations} number of iterations
+#' \item \code{graph} a graph object from igraph package. For more details see ?igraph.
+#' \item \code{clusters} clusters revealing sub-graph structure in the model For more details see ?gslope.
+#' }
 #' @examples
 #' d = gslope(as.matrix(mtcars))
 #' summary(d)
-#' 
+#'
 #' @export
 summary <- function(x){
   UseMethod("summary")

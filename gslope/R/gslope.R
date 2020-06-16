@@ -34,6 +34,7 @@ prepare_lambda = function(lambda, low_tri_size) {
 
 #' @title Graphical SLOPE
 #' @description  Computes precision matrix for graph models using graphical SLOPE.
+#'
 #' @param data a matrix containing observations of variables of interest.
 #' @param lambda vector of regularizers for SLOPE. By default computed based on Benjamini-Hochberg's method.
 #' @param sample_cov variance-covariance matrix.
@@ -43,7 +44,9 @@ prepare_lambda = function(lambda, low_tri_size) {
 #' @param threshold {a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked. Default 10e-4.}
 #' @param epsilon a value used to determine accuracy of the ADMM algorithm. Default 10e-4.
 #' @param alpha significance level.
+#'
 #' @keywords precision matrix, graphical slope
+#'
 #' @return {returns a list containing following components:
 #' \itemize{
 #' \item \code{precision_matrix} a precision matrix revealing graph structure for the data.

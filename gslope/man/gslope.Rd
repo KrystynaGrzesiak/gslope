@@ -35,7 +35,19 @@ gslope(
 \item{sample_cov}{variance-covariance matrix.}
 }
 \value{
-
+{returns a list containing following components:
+\itemize{
+\item \code{precision_matrix} a precision matrix revealing graph structure for the data.
+\item \code{covariance_matrix} covariance matrix equal to the inverse of the presicion matrix.
+\item \code{scaled_precision_matrix} {An element with coordinates (k,l) is given by formula:\cr
+k_lm=-Cov(X_l,X_m|X_(V\ \{l,m\}))/(Var(X_l|X_(V\ \{l,m\}))^(1/2)*Var(X_m|X_(V\ \{l,m\}))^(1/2)).}
+\item \code{lambda} a vector of penalty parameters used in SLOPE.
+\item \code{iterations} a number of iterations performed in ADMM algorithm.
+\item \code{graph} an IGRAPH object returning set of edges between vertices in the model. For more details see ?igraph
+\item \code{clusters} {a sub-graph structure. Numbers associeted with vertex indicates which sub-graph the vertex belongs to.
+If all verices are marked with ones, then there is only one graph in the model. Size an number of clusters are additionaly
+provided in separate vectors. For more details see ?clusters.}
+}}
 }
 \description{
 Computes precision matrix for graph models using graphical SLOPE.

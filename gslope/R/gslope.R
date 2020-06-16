@@ -82,7 +82,9 @@ gslope = function(data,
                   alpha = 0.05) {
 
   call = match.call()
-  names = colnames(data)
+  if(is.null(colnames(data)))
+    names = 1:ncol(data) else
+      names = colnames(data)
   sample_cov = if(!scaled) cov(scale(data)) else cov(data)
   lambda = if(is.null(lambda)) gslope::create_lambda(sample_cov, nrow(data), alpha)
 

@@ -2,11 +2,12 @@
 % Please edit documentation in R/plot.R
 \name{plot}
 \alias{plot}
+\alias{plot.gslope}
 \title{Plot precision matrix}
 \usage{
-plot(x, plt = "precision", col = "black")
+plot(x, plt, col)
 
-plot(x, plt = "precision", col = "black")
+\method{plot}{gslope}(x, plt = "precision", col = "black")
 }
 \arguments{
 \item{x}{an object of class `'gslope'`}

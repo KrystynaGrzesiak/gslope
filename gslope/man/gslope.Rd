@@ -20,29 +20,22 @@ gslope(
 
 \item{lambda}{vector of regularizers for SLOPE. By default computed based on Benjamini-Hochberg's method.}
 
-\item{scaled}{logical. The data need to be scaled so that it has mean = 0 and variance = 1. If TRUE, build-in data scaling will be omitted.}
+\item{scaled}{{logical. The data need to be scaled so that it has mean = 0 and variance = 1. If TRUE, build-in data scaling will be omitted.}}
 
-\item{mu}{## TODO:  czo to?}
+\item{mu}{correction for lambda scaling in ADMM algorithm.}
 
 \item{max_iter}{maximum number of iterations allowed in ADMM algorithm. Default 10 000.}
 
 \item{epsilon}{a value used to determine accuracy of the ADMM algorithm. Default 10e-4.}
 
-\item{threshold}{a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked. Default 10e-4.}
+\item{threshold}{{a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked. Default 10e-4.}}
 
 \item{alpha}{significance level.}
 
 \item{sample_cov}{variance-covariance matrix.}
 }
 \value{
-\code{gslope} returns a list containing following components:
-\item{precision_matrix}{a precision matrix revealing graph structure for the data.}
-\item{covariance_matrix}{covariance matrix equal to the inverse of the presicion matrix.}
-\item{scaled_precision_matrix}{...}
-\item{lambda}{a vector of penalty parameters used in SLOPE.}
-\item{iterations}{a number of iterations performed in ADMM algorithm.}
-\item{graph}{a graph based on precision matrix.}
-\item{clusters}{aconnected entries of a graph.}
+
 }
 \description{
 Computes precision matrix for graph models using graphical SLOPE.

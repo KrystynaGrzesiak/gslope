@@ -6,7 +6,7 @@
 #' @keywords lambda, graphical slope, penalty
 #' @return \code{create_lambda()} returns a vector of the length \eqn{p * (p-1)/2}, which is equal
 #' to number of elements in lower (upper) triangle of a variance-covariance matrix excluding diagonal.
-#' @details The Lambda series are computed based on Benjamini-Hochberg's correction.
+#' @details The Lambda series are computed based on Benjamini-Hochberg's procedure.
 #' @examples
 #' sample_cov = cov(scale(mtcars))
 #' create_lambda(sample_cov, nrow(mtcars))

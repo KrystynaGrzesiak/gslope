@@ -11,27 +11,28 @@ ADMM_algorithm(sample_cov, lambda, mu = 1.1, max_iter = 10000, epsilon = 1e-04)
 
 \item{lambda}{vector of SLOPE regularizers.}
 
-\item{mu}{correction for scaling lambda.}
+\item{mu}{correction for lambda scaling.}
 
 \item{max_iter}{maximum number of iterations of ADMM algorithm. Default 10 000.}
 
 \item{epsilon}{a value determining stop condition.}
 }
 \value{
-\code{ADMM_algorithm} A list with components:
-\item{precision_matrix}{precision matrix revealing graph structure for the data.}
-\item{iterations}{number of iterations before stop condition or \code{max_iter}.}
+\code{ADMM_algorithm} returns a list with components:
+\itemize{
+\item \code{precision_matrix} precision matrix revealing graph structure for the data.
+\item \code{iterations} number of iterations before stop condition or \code{max_iter}.
+}
 }
 \description{
 Executes ADMM algorithm to find precision matrix.
 }
 \details{
-#TODO: details
+ADMM algorithm is used to solve convex optimization problems by dividing them into smaller, easier to solve problems.
 }
 \examples{
 sample_cov = cov(scale(mtcars))
 lambda = gslope::create_lambda(sample_cov, nrow(mtcars))
 precision_matrix = ADMM_algorithm(sample_cov, lambda)
 }
-\keyword{TODO:}
-\keyword{keywords}
+\keyword{admm}

@@ -21,7 +21,7 @@ to number of elements in lower (upper) triangle of a variance-covariance matrix 
 Computes penalty parameters \eqn{\lambda} for graphical SLOPE.
 }
 \details{
-The Lambda series are computed based on Benjamini-Hochberg's correction.
+The Lambda series are computed based on Benjamini-Hochberg's procedure.
 }
 \examples{
 sample_cov = cov(scale(mtcars))

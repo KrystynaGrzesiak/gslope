@@ -17,6 +17,6 @@ bibentry(
   bibtype    = "MastersThesis",
   title    = "Precision matrix estimation in Gaussian graphical models",
   author   = person("Michał","Makowski"),
-  year     = "2018",
+  year     = "2019",
   school   = "Uniwersytet Wrocławski",
 ))

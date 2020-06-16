@@ -13,6 +13,9 @@ Suggests:
     knitr,
     rmarkdown
 Imports:
-    SLOPE
+    SLOPE,
+    igraph,
+    ggplot2,
+    GGally
 RoxygenNote: 7.1.0.9000
 VignetteBuilder: knitr

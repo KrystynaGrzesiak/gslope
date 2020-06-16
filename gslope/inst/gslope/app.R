@@ -87,23 +87,23 @@ ui <- fluidPage(theme = shinytheme("superhero"),
               ),
               fluidRow(
                 column(2, helpText("Cov_p:")),
-                column(6, verbatimTextOutput("value_p"))
+                column(12, verbatimTextOutput("value_p"))
               ),
 
               fluidRow(
                 column(3, helpText("Theoretical precision matrix:")),
-                column(6, verbatimTextOutput("prec"))
+                column(12, verbatimTextOutput("prec"))
               ),
 
               fluidRow(
                 column(2, helpText("Sample covariance:")),
-                column(6, verbatimTextOutput("sample_cov"))
+                column(12, verbatimTextOutput("sample_cov"))
               ),
 
 
               fluidRow(
                 column(3, helpText("Estimated precision matrix:")),
-                column(8, verbatimTextOutput("prec_est"))
+                column(12, verbatimTextOutput("prec_est"))
               )
             )
           ),
@@ -122,33 +122,33 @@ ui <- fluidPage(theme = shinytheme("superhero"),
 
                    mainPanel(
                      hr(),
-                     fluidRow(column(10, verbatimTextOutput("gslope_lst")))
+                     fluidRow(column(12, verbatimTextOutput("gslope_lst")))
                    )
           ),
 
           tabPanel("Matrix plot",
             sidebarPanel(
               selectInput("data", label = h3("Select data"),
-                          choices = list("generated" = 1, "mtcars" = 2, "other" = 3),
+                          choices = list("generated" = 1, "mtcars" = 2, "JGL: example.data" = 3),
                           selected = 1)
             ),
 
             mainPanel(
               hr(),
-              fluidRow(column(10, plotOutput("plot_prec")))
+              fluidRow(column(12, plotOutput("plot_prec")))
             )
           ),
 
           tabPanel("Graphs",
             sidebarPanel(
               selectInput("data_graph", label = h3("Select data"),
-                          choices = list("generated" = 1, "mtcars" = 2, "other" = 3),
+                          choices = list("generated" = 1, "mtcars" = 2, "JGL: example.data" = 3),
                           selected = 1)
             ),
 
             mainPanel(
               hr(),
-              fluidRow(column(10, plotOutput("plot_graph")))
+              fluidRow(column(12, plotOutput("plot_graph")))
             )
           )
         )
@@ -159,6 +159,10 @@ server <- function(input, output) {
   library(gslope)
   library(glasso)
   library(mvtnorm)
+  library(JGL)
+
+
+  genes = example.data[[1]][,1:15]
 
 
   create_Gamma = function(p){
@@ -169,16 +173,20 @@ server <- function(input, output) {
     })
   }
 
+
   generate_X = function(n, Gamma){
     rmvnorm(n, rep(0, nrow(Gamma)), Gamma)
   }
 
+
   url = a("Statistical learning with Sparsity",
           href = "https://web.stanford.edu/~hastie/StatLearnSparsity/")
+
 
   output$link <- renderUI({
     tagList("The clever book:", url)
   })
+
 
   n <- reactive({input$num_n})
   p <- reactive({input$num_p})
@@ -205,13 +213,21 @@ server <- function(input, output) {
 
 
   output$sample_cov <- renderPrint({
-    cov(X())
+    round(cov(X()),4)
   })
 
 
   output$prec_est <- renderPrint({
     round(gslope_X()[[1]], 4)
   })
+
+  # output$prec_est <- renderPrint({
+  #   # round(gslope_X()[[1]], 4)
+  #   g = glasso(cov(X()), 1)[[2]]
+  #   g = -cov2cor(g)
+  #   g[abs(g)<thr()] = 0
+  #   g
+  # })
 
 
   output$gslope_lst <- renderPrint({
@@ -227,6 +243,8 @@ server <- function(input, output) {
     }
     if(input$data == 2)
       plot(gslope(scale(mtcars), scaled=TRUE))
+    if(input$data_graph == 3)
+      plot(gslope(genes, scaled=TRUE))
   })
 
 
@@ -235,6 +253,8 @@ server <- function(input, output) {
       graph_plot(gslope(X(), scaled=TRUE, threshold = thr()))
     if(input$data_graph == 2)
       graph_plot(gslope(scale(mtcars), scaled=TRUE))
+    if(input$data_graph == 3)
+      graph_plot(gslope(genes, scaled=TRUE))
   })
 
 }

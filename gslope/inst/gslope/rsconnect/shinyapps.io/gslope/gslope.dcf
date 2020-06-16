@@ -1,0 +1,10 @@
+name: gslope
+title:
+username:
+account: gslope
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2464833
+bundleId: 3279780
+url: https://gslope.shinyapps.io/gslope/
+when: 1592350576.19979

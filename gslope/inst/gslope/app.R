@@ -107,7 +107,7 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                                        
                                        
                                        fluidRow(
-                                         column(3, helpText("Estimated precision matrix:")),
+                                         column(3, helpText("Estimated scaled precision matrix:")),
                                          column(12, verbatimTextOutput("prec_est"))
                                        )
                                      )

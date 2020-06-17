@@ -129,7 +129,7 @@ ui <- fluidPage(theme = shinytheme("superhero"),
           tabPanel("Matrix plot",
             sidebarPanel(
               selectInput("data", label = h3("Select data"),
-                          choices = list("generated" = 1, "mtcars" = 2, "JGL: example.data" = 3),
+                          choices = list("generated" = 1, "mtcars" = 2, "frets" = 3),
                           selected = 1)
             ),
 
@@ -142,7 +142,7 @@ ui <- fluidPage(theme = shinytheme("superhero"),
           tabPanel("Graphs",
             sidebarPanel(
               selectInput("data_graph", label = h3("Select data"),
-                          choices = list("generated" = 1, "mtcars" = 2, "JGL: example.data" = 3),
+                          choices = list("generated" = 1, "mtcars" = 2, "frets" = 3),
                           selected = 1)
             ),
 
@@ -159,10 +159,7 @@ server <- function(input, output) {
   library(gslope)
   library(glasso)
   library(mvtnorm)
-  library(JGL)
-
-
-  genes = example.data[[1]][,1:15]
+  library(boot)
 
 
   create_Gamma = function(p){
@@ -218,7 +215,7 @@ server <- function(input, output) {
 
 
   output$prec_est <- renderPrint({
-    round(gslope_X()[[1]], 4)
+    round(gslope_X()[[3]], 4)
   })
 
   # output$prec_est <- renderPrint({
@@ -235,16 +232,15 @@ server <- function(input, output) {
   })
 
 
-
   output$plot_prec <- renderPlot({
     if(input$data == 1){
       g_X = gslope(X(), scaled=TRUE, threshold = thr())
-      plot(g_X)
+      plot(g_X, plt = "scaled_precision")
     }
     if(input$data == 2)
-      plot(gslope(scale(mtcars), scaled=TRUE))
+      plot(gslope(scale(mtcars), scaled=TRUE), plt = "scaled_precision")
     if(input$data_graph == 3)
-      plot(gslope(genes, scaled=TRUE))
+      plot(gslope(frets), plt = "scaled_precision")
   })
 
 
@@ -254,7 +250,7 @@ server <- function(input, output) {
     if(input$data_graph == 2)
       graph_plot(gslope(scale(mtcars), scaled=TRUE))
     if(input$data_graph == 3)
-      graph_plot(gslope(genes, scaled=TRUE))
+      graph_plot(gslope(frets))
   })
 
 }

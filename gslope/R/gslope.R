@@ -97,11 +97,11 @@ gslope = function(data,
   rownames(precision_matrix) = names
   colnames(precision_matrix) = names
 
-  precision_matrix[abs(precision_matrix) < threshold] = 0
+
   scaled_precision_matrix = -cov2cor(precision_matrix)
+  scaled_precision_matrix[abs(scaled_precision_matrix) < threshold] = 0
 
-
-  graph = graph_from_adjacency_matrix(precision_matrix,
+  graph = graph_from_adjacency_matrix(scaled_precision_matrix,
                                       mode = c("undirected"),
                                       weighted = TRUE,
                                       diag = FALSE,

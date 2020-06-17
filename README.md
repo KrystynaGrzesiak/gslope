@@ -4,21 +4,21 @@ Gslope is an R package that estimates a precision matrix based on ADMM algorithm
 
 The package contains:
 
-#ADMM_algorithm()  - ADMM algorithm for graphical SLOPE
+`ADMM_algorithm()`  - ADMM algorithm for graphical SLOPE
 
-#coef() - Prints precision matrix from gslope
+`coef()` - Prints precision matrix from gslope
 
-#create_lambda() - Penalty parameters for graphical SLOPE
+`create_lambda()` - Penalty parameters for graphical SLOPE
 
-#graph_plot() - Plot graph for gslope.
+`graph_plot()` - Plot graph for gslope.
 
-gslope() - Graphical SLOPE
+`gslope()` - Graphical SLOPE
 
-plot() - Plot precision matrix
+`plot()` - Plot precision matrix
 
-prepare_lambda() - Preparation of lambda
+`prepare_lambda()` - Preparation of lambda
 
-summary() - Prints all parameters from gslope
+`summary()` - Prints all parameters from gslope
 
 
 ## Overview

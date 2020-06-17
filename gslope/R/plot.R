@@ -14,7 +14,7 @@
 #'
 #' @param x an object of class `'gslope'`
 #' @param col a character, color name. Default "black"
-#' @param plt a plot type. Accepts either \code{'precision'}, \code{'corr'} or \code{'scaled_precision'}. Default \code{'precision'}.
+#' @param plt a plot type. Accepts either \code{'precision'}, \code{'covariance'}, \code{'corr'} or \code{'scaled_precision'}. Default \code{'precision'}.
 #'
 #' @return Prints output on the screen
 #'
@@ -33,10 +33,26 @@ plot <- function(x, plt, col){
 #' @rdname plot
 #' @export
 #'
-plot.gslope = function(x, plt = "precision", col = "black"){
+plot.gslope = function(x, plt = "scaled_precision", col = "black"){
   
-  if(!(plt %in% c("precision", "corr", "scaled_precision"))) stop("Plt must be either precision, corr or scaled_precision")
+  if(!(plt %in% c("precision", "corr", "scaled_precision", "covariance"))) stop("Plt must be either precision, covariance, corr or scaled_precision")
 
+  if(plt == "scaled_precision") {
+    scaled_precision = x$scaled_precision_matrix
+    X = colnames(scaled_precision)
+    y = X
+    data = expand.grid(X = X, Y = y)
+    data$value = c(scaled_precision)
+    
+    result = ggplot(data, mapping = aes(X, Y, fill = value)) + 
+      geom_tile() +
+      scale_fill_gradient(low = col, high = "white") +
+      ggtitle("Scaled precision matrix") +
+      ylab("") +
+      xlab("") +
+      theme(plot.title = element_text(hjust = 0.5))
+  }
+  
   if(plt == "precision") {
     precision_matrix = x$precision_matrix
     X = colnames(precision_matrix)
@@ -60,14 +76,23 @@ plot.gslope = function(x, plt = "precision", col = "black"){
       labs(title = "Correlation matrix") +
       theme(plot.title = element_text(hjust = 0.5))
   }
-  if(plt == "scaled_precision") {
-    result = ggcorr(x$scaled_precision_matrix, 
-           nbreaks = 5, 
-           low = col, 
-           high = col)+
-      labs(title = "Scaled precision matrix") +
+  
+  if(plt == "covariance") {
+    covariance = x$covariance_matrix
+    X = colnames(covariance)
+    y = X
+    data = expand.grid(X = X, Y = y)
+    data$value = c(covariance)
+    
+    result = ggplot(data, mapping = aes(X, Y, fill = value)) + 
+      geom_tile() +
+      scale_fill_gradient(low = "white", high = col) +
+      ggtitle("Covariance matrix") +
+      ylab("") +
+      xlab("") +
       theme(plot.title = element_text(hjust = 0.5))
   }
+
   result
 }
 

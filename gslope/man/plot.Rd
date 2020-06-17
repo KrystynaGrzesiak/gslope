@@ -7,12 +7,12 @@
 \usage{
 plot(x, plt, col)
 
-\method{plot}{gslope}(x, plt = "precision", col = "black")
+\method{plot}{gslope}(x, plt = "scaled_precision", col = "black")
 }
 \arguments{
 \item{x}{an object of class `'gslope'`}
 
-\item{plt}{a plot type. Accepts either \code{'precision'}, \code{'corr'} or \code{'scaled_precision'}. Default \code{'precision'}.}
+\item{plt}{a plot type. Accepts either \code{'precision'}, \code{'covariance'}, \code{'corr'} or \code{'scaled_precision'}. Default \code{'precision'}.}
 
 \item{col}{a character, color name. Default "black"}
 }

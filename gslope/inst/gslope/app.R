@@ -29,15 +29,20 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                    ),
 
                    mainPanel(
-                     p(span('Bonjour!', br(), 'Dowiecie się dzisiaj kilku wspaniałych
-                        rzeczy o modelach grafowych, w szczególności o',
-                      strong('grafowym SLOPE,'),
-                      'a także poznacie świeżutki pakiet',
-                      strong('gslope'),
-                      'i zobaczycie, jak go używać.'), style="font-size:20px; text-align:center"),
-                      p('Z tą wiedzą świat stoi
-                      przed wami otworem!', style="font-size:25px; text-align:center")
-                   )
+                     p(span('Bonjour!', br(), 'Today is your lucky day when you can explore some amazing things', br(),
+                      'about graphical models, and in particular abour graphical SLOPE.',br(),
+                      'You will get to know fabulous package ', strong('gslope'), ' and learn how to use it.',br(),
+                      'So let us not waste any more time... Welcome to the Wonderland!',
+                      style="font-size:20px; text-align:center"),br(),br(),br(),
+                      p('This is the package about graphical slope,',br(),
+                        'Sit down and listen, don\'t say nope.',br(),
+                        'This is the package about graphicat slope,',br(),
+                        'It comes to rescue when there\'s no hope.',br(),
+                        'This is the package about graphicat slope,',br(),
+                        'It does the things you couldn\'t cope.',br(),
+                        '- Gandalf the White',
+                        style="font-size:15px; text-align:leftr")
+                   ))
           ),
 
           tabPanel("gModels - intuition",

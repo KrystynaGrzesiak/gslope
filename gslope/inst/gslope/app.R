@@ -236,17 +236,34 @@ server <- function(input, output) {
     gslope(X(), scaled = TRUE, threshold = thr())[[as.integer(input$lst)]]
   })
 
+  input_data = reactive({input$data})
 
-  output$plot_prec <- renderPlot({
-    if(input$data == 1){
-      g_X = gslope(X(), scaled=TRUE, threshold = thr())
+  foo <- function(data, X, thr){
+    if(data == 1){
+      g_X = gslope(X, scaled=TRUE, threshold = thr)
       plot(g_X, plt = "scaled_precision")
     }
-    if(input$data == 2)
+    if(data == 2)
       plot(gslope(scale(mtcars), scaled=TRUE), plt = "scaled_precision")
-    if(input$data_graph == 3)
+    if(data == 3)
       plot(gslope(frets), plt = "scaled_precision")
-  })
+  }
+
+  output$plot_prec <- renderPlot(
+    foo(input_data(), X(), thr())
+  )
+
+
+  # output$plot_prec <- renderPlot({
+  #   if(input_data() == 1){
+  #     g_X = gslope(X(), scaled=TRUE, threshold = thr())
+  #     plot(g_X, plt = "scaled_precision")
+  #   }
+  #   if(input_data() == 2)
+  #     plot(gslope(scale(mtcars), scaled=TRUE), plt = "scaled_precision")
+  #   if(input_data() == 3)
+  #     plot(gslope(frets), plt = "scaled_precision")
+  # })
 
 
   output$plot_graph <- renderPlot({

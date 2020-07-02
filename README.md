@@ -27,6 +27,9 @@ The package contains:
 ## Installation
 
 ```R
+if (!require(devtools)) {
+  install.packages('devtools')
+}
 devtools::install_github("StatsIMUWr/gslope")
 ```
 

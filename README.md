@@ -1,30 +1,10 @@
-# gslope
+# gSLOPE: sparse precision matrix estimation with Sorted L-One Penalizaed Estimation (SLOPE)
 
-Gslope is an R package that estimates a precision matrix based on ADMM algorithm.
-
-The package contains:
-
-`ADMM_algorithm()`  - ADMM algorithm for graphical SLOPE
-
-`coef()` - Prints precision matrix from gslope
-
-`create_lambda()` - Penalty parameters for graphical SLOPE
-
-`graph_plot()` - Plot graph for gslope.
-
-`gslope()` - Graphical SLOPE
-
-`plot()` - Plot precision matrix
-
-`prepare_lambda()` - Preparation of lambda
-
-`summary()` - Prints all parameters from gslope
-
-
-## Overview
-
+`gSLOPE` is an R package that estimates a sparse precision matrix based on regularization by the [SLOPE](https://arxiv.org/pdf/1407.3824.pdf).
 
 ## Installation
+
+Run the following code in R console to download the latest development version from Github:
 
 ```R
 if (!require(devtools)) {
@@ -35,7 +15,7 @@ devtools::install_github("StatsIMUWr/gslope")
 
 ## Usage
 
-
+The main function of the package is `gslope`. It estimates the precision matrix . `summary` and `plot` methods are available. Details can be found in [documentation online](https://statsimuwr.github.io/gslope/).
 
 ```R
 library(gslope)

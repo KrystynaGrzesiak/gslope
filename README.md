@@ -1,5 +1,10 @@
 # gSLOPE: sparse precision matrix estimation with Sorted L-One Penalizaed Estimation (SLOPE)
 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/StatsIMUWr/gslope.svg?branch=master)](https://travis-ci.org/StatsIMUWr/gslope)
+<!-- badges: end -->
+
+
 `gSLOPE` is an R package that estimates a sparse precision matrix based on regularization by the [SLOPE](https://arxiv.org/pdf/1407.3824.pdf).
 
 ## Installation

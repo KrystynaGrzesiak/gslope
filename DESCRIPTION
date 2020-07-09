@@ -5,6 +5,7 @@ Version: 0.1.0
 Authors@R: c(person("Zofia", "Dziedzic"), 
              person("Krystyna", "Grzesiak"),
              person("Tomasz", "Kulik"),
+             person("Mateusz", "Staniak"),
              person("Michał", "Makowski"))
 Description: Computation of precision matrix based on graphical SLOPE.
 License: GPL-3

@@ -86,7 +86,7 @@ gslope = function(data,
     names = 1:ncol(data) else
       names = colnames(data)
   sample_cov = if(!scaled) cov(scale(data)) else cov(data)
-  lambda = if(is.null(lambda)) gslope::create_lambda(sample_cov, nrow(data), alpha)
+  lambda = if(is.null(lambda)) create_lambda(sample_cov, nrow(data), alpha)
 
   p = ncol(data)
   lambda = prepare_lambda(lambda, p*(p-1)/2)

@@ -2,11 +2,7 @@ Package: gslope
 Type: Package
 Title: Graphical SLOPE
 Version: 0.1.0
-Authors@R: c(person("Zofia", "Dziedzic"), 
-             person("Krystyna", "Grzesiak"),
-             person("Tomasz", "Kulik"),
-             person("Mateusz", "Staniak"),
-             person("Michał", "Makowski"))
+Authors: Krystyna Grzesiak, Zofia Dziedzic, Tomasz Kulik, Michał Makowski, Mateusz Staniak
 Description: Computation of precision matrix based on graphical SLOPE.
 License: GPL-3
 Encoding: UTF-8

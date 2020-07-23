@@ -16,10 +16,12 @@ Imports:
     SLOPE,
     igraph,
     ggplot2,
-    GGally
+    GGally,
+    Rcpp
 RoxygenNote: 7.1.0.9000
 VignetteBuilder: knitr
 Language: en-US
-
-
-
+LinkingTo: 
+    Rcpp,
+    SLOPE,
+    RcppArmadillo

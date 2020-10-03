@@ -5,9 +5,9 @@
 \alias{plot.gslope}
 \title{Plot precision matrix}
 \usage{
-plot(x, plt, col)
+plot(x, plt, col, ...)
 
-\method{plot}{gslope}(x, plt = "scaled_precision", col = "black")
+\method{plot}{gslope}(x, plt = "scaled_precision", col = "black", ...)
 }
 \arguments{
 \item{x}{an object of class `'gslope'`}
@@ -15,6 +15,8 @@ plot(x, plt, col)
 \item{plt}{a plot type. Accepts either \code{'precision'}, \code{'covariance'}, \code{'corr'} or \code{'scaled_precision'}. Default \code{'precision'}.}
 
 \item{col}{a character, color name. Default "black"}
+
+\item{...}{Other parameters}
 }
 \value{
 Prints output on the screen

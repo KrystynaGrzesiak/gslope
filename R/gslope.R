@@ -1,5 +1,3 @@
-#' @importFrom igraph "graph_from_adjacency_matrix"
-#' @importFrom igraph "clusters"
 
 #' @title Preparation of lambda
 #' @description  Prepares penalty parameters \eqn{\lambda} for further computations in graphical SLOPE.
@@ -37,7 +35,6 @@ prepare_lambda = function(lambda, low_tri_size) {
 #'
 #' @param data a matrix containing observations of variables of interest.
 #' @param lambda vector of regularizers for SLOPE. By default computed based on Benjamini-Hochberg's method.
-#' @param sample_cov variance-covariance matrix.
 #' @param scaled {logical. The data need to be scaled so that it has mean = 0 and variance = 1. If TRUE, build-in data scaling will be omitted.}
 #' @param mu correction for lambda scaling in ADMM algorithm.
 #' @param max_iter maximum number of iterations allowed in ADMM algorithm. Default 10 000.
@@ -80,15 +77,19 @@ gslope = function(data,
                   epsilon = 1e-4,
                   threshold = 1e-4,
                   alpha = 0.05) {
+  sample_cov = NULL
 
   call = match.call()
   if(is.null(colnames(data)))
     names = 1:ncol(data) else
       names = colnames(data)
-  sample_cov = if(!scaled) cov(scale(data)) else cov(data)
-   if(is.null(lambda)) {
+
+  if(!scaled)
+    sample_cov = cov(scale(data)) else
+      sample_cov = cov(data)
+
+   if(is.null(lambda))
     lambda = gslope::create_lambda(sample_cov, nrow(data), alpha)
-  }
 
   p = ncol(data)
   lambda = prepare_lambda(lambda, p*(p-1)/2)
@@ -103,7 +104,7 @@ gslope = function(data,
   scaled_precision_matrix = -cov2cor(precision_matrix)
   scaled_precision_matrix[abs(scaled_precision_matrix) < threshold] = 0
 
-  graph = graph_from_adjacency_matrix(scaled_precision_matrix,
+  graph = igraph::graph_from_adjacency_matrix(scaled_precision_matrix,
                                       mode = c("undirected"),
                                       weighted = TRUE,
                                       diag = FALSE,
@@ -116,7 +117,7 @@ gslope = function(data,
                 lambda = lambda,
                 iterations = ADMM_results[[2]],
                 graph = graph,
-                clusters = clusters(graph),
+                clusters = igraph::clusters(graph),
                 call = call)
   class(result) <- "gslope"
   result

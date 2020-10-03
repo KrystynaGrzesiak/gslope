@@ -1,22 +1,10 @@
-#' @importFrom ggplot2 "ggplot"
-#' @importFrom ggplot2 "geom_tile"
-#' @importFrom ggplot2 "scale_fill_gradient"
-#' @importFrom ggplot2 "scale_fill_gradient2"
-#' @importFrom ggplot2 "coord_fixed"
-#' @importFrom ggplot2 "aes"
-#' @importFrom ggplot2 "ggtitle"
-#' @importFrom ggplot2 "xlab"
-#' @importFrom ggplot2 "ylab"
-#' @importFrom ggplot2 "theme"
-#' @importFrom ggplot2 "labs"
-#' @importFrom ggplot2 "element_text"
 
 #' @title Plot precision matrix
 #'
 #' @param x an object of class `'gslope'`
 #' @param col a character, color name. Default "black"
 #' @param plt a plot type. Accepts either \code{'precision'}, \code{'covariance'}, \code{'corr'} or \code{'scaled_precision'}. Default \code{'precision'}.
-#'
+#' @param ... Other parameters
 #' @return Prints output on the screen
 #'
 #' @examples
@@ -27,14 +15,16 @@
 
 #' @export
 
-plot <- function(x, plt, col){
+plot <- function(x, plt, col, ...){
   UseMethod('plot')
 }
 
 #' @rdname plot
+#' @param ... Other parameters
 #' @export
 #'
-plot.gslope = function(x, plt = "scaled_precision", col = "black"){
+plot.gslope = function(x, plt = "scaled_precision", col = "black", ...){
+  Y = value = NULL
 
   if(!(plt %in% c("precision", "corr", "scaled_precision", "covariance"))) stop("Plt must be either precision, covariance, corr or scaled_precision")
 

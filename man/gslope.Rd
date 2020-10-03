@@ -31,8 +31,6 @@ gslope(
 \item{threshold}{{a value used to determine which variables in graphical model are not linked by an edge. The larger the value, the more variables will be unlinked. Default 10e-4.}}
 
 \item{alpha}{significance level.}
-
-\item{sample_cov}{variance-covariance matrix.}
 }
 \value{
 {returns a list containing following components:
